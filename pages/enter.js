@@ -1,28 +1,29 @@
 import { googleAuthProvider, auth } from '../lib/firebase';
 import { signInWithPopup } from 'firebase/auth';
-import { useContext } from 'react';
 import { UserContext } from '../lib/context';
+import { useContext } from 'react';
 
 export default function EnterPage({ }) {
-  const { user, username } = useContext(UserContext)
+  const { user, username } = useContext(UserContext);
   
   // 1. user signed out <SignInButton />
   // 2. user signed in, but missing username <UsernameForm />
   // 3. user signed in, has username <SignOutButton />
   return (
-      <main>
-          {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
-      </main>
+    <main>
+      {user ? 
+        !username ? <UsernameForm /> : <SignOutButton />
+        : 
+        <SignInButton />
+      }
+    </main>
   );
 }
 
 // Sign in with google button
 function SignInButton() {
   const signInWithGoogle = async () => {
-    await signInWithPopup(auth, googleAuthProvider)
-    .then((re) => {
-      console.log(re);
-    });
+    await signInWithPopup(auth, googleAuthProvider);
   };
 
   return (
@@ -38,5 +39,5 @@ function SignOutButton() {
 }
 
 function UsernameForm() {
-
+  
 }
