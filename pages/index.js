@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 export default function Home() {
   return (
     <div>
-      <button onClick={() => toast.success('hello toast')}>
+      <button onClick={() => toast.success('i am going to eat your grandma')}>
         Toast Me
       </button>
     </div>
