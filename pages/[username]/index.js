@@ -5,7 +5,6 @@ import { firestore } from '../../lib/firebase';
 import { query, getDocs, collection, limit, where, orderBy } from 'firebase/firestore';
 
 export async function getServerSideProps(context) {
-  console.log(context.params.username);
   const username = context.params.username;
 
   const userDoc = await getUserWithUsername(username);

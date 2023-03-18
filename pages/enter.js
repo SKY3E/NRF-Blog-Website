@@ -8,6 +8,8 @@ import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
 // Write and get documents from firestore
 import { doc, getDoc, writeBatch } from 'firebase/firestore'
+// React Hot Toast
+import toast from 'react-hot-toast';
  
 export default function EnterPage() {
   const { user, username } = useContext(UserContext);
@@ -33,15 +35,23 @@ function SignInButton() {
   };
 
   return (
-    <button className="btn-google" onClick={signInWithGoogle}>
-      <img src='/google.png' /> Sign in with Google
-    </button>
+    <div>
+      <button className="btn-google" onClick={signInWithGoogle}>
+        <img src='/google.png' /> Sign in with Google
+      </button>
+      <button onClick={() => toast.success("You're currently signed out.")}>Sign-In State</button>
+    </div>
   );
 }
 
 // Sign out button
 function SignOutButton() {
-  return <button onClick={() => auth.signOut()}>Sign out</button>;
+  return(
+  <div>
+    <button onClick={() => auth.signOut()}>Sign out</button>
+    <button onClick={() => toast.success("You're currently signed in.")}>Sign-In State</button>
+  </div>
+  );
 }
 
 function UsernameForm() {
