@@ -6,7 +6,6 @@ import { Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps }) {
   const userData = useUserData();
-  console.log(userData);
 
   return (
     <UserContext.Provider value={ userData }>
