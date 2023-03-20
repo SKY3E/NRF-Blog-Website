@@ -14,7 +14,12 @@ export default function Navbar() {
                         <button className="btn-logo">FEED</button>
                     </Link>
                 </li>
-
+                {/* sign out button */}
+                <li>
+                    <Link href="/enter" legacyBehavior>
+                        <button className="btn-blue">Enter Page</button>
+                    </Link>
+                </li> 
                 {/* user is signed in and has username */}
                 {username && (
                     <>

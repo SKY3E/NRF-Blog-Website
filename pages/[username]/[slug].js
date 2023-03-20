@@ -15,9 +15,9 @@ export async function getStaticProps(context) {
 
   if (userDoc) {
     const postRefQuery = query(collection(firestore, 'posts'), where('slug', '==', slug));
-    const querySnapshot = await getDocs(postRefQuery);
-    if (!querySnapshot.empty) {
-      const postRef = querySnapshot.docs[0].ref;
+    const postRefQuerySnapshot = await getDocs(postRefQuery);
+    if (!postRefQuerySnapshot.empty) {
+      const postRef = postRefQuerySnapshot.docs[0].ref;
       post = postToJSON(await getDoc(postRef));
       path = postRef.path;
     } else {

@@ -4,7 +4,7 @@ import { firestore, fromMillis, postToJSON } from '../lib/firebase';
 import { useState } from 'react';
 import { query, getDocs, collection, limit, where, orderBy, startAfter } from 'firebase/firestore';
 
-const LIMIT = 1;
+const LIMIT = 5;
 
 export async function getServerSideProps(context) {
   const postsQuery = query(
