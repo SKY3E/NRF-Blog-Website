@@ -1,9 +1,9 @@
 import styles from '../../styles/Admin.module.css';
 import AuthCheck from '../../components/AuthCheck';
 import { firestore, auth } from '../../lib/firebase';
-import { serverTimestamp, doc, collection } from 'firebase/firestore';
+import { serverTimestamp, doc, collection, updateDoc } from 'firebase/firestore';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { useDocumentData } from 'react-firebase-hooks/firestore';
@@ -57,12 +57,13 @@ function PostForm({ defaultValues, postRef, preview }) {
   const { register, handleSubmit, reset, watch } = useForm({ defaultValues, mode: 'onChange' });
 
   const updatePost = async ({ content, published }) => {
-    await postRef.update({
+    console.log('Update post:', content, published);
+    await updateDoc(postRef,{
       content,
       published,
       updatedAt: serverTimestamp(),
     });
-
+    console.log('Post updated successfully');
     reset({ content, published });
 
     toast.success('Post updated successfully!')
@@ -78,10 +79,10 @@ function PostForm({ defaultValues, postRef, preview }) {
 
       <div className={preview ? styles.hidden : styles.controls}>
   
-        <textarea name="content" ref={register}></textarea>
+        <textarea name="content" {...register('content', { required: true })}></textarea>
 
         <fieldset>
-          <input className={styles.checkbox} name="published" type="checkbox" ref={register} />
+          <input className={styles.checkbox} name="published" {...register('published', { required: true })} type="checkbox" />
           <label>Published</label>
         </fieldset>
 
