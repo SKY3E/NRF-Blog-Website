@@ -60,7 +60,7 @@ function PostForm({ defaultValues, postRef, preview }) {
     console.log('Update post:', content, published);
     await updateDoc(postRef,{
       content,
-      published,
+      published: published || false,
       updatedAt: serverTimestamp(),
     });
     console.log('Post updated successfully');
@@ -82,7 +82,7 @@ function PostForm({ defaultValues, postRef, preview }) {
         <textarea name="content" {...register('content', { required: true })}></textarea>
 
         <fieldset>
-          <input className={styles.checkbox} name="published" {...register('published', { required: true })} type="checkbox" />
+          <input className={styles.checkbox} name="published" {...register('published', { required: false })} type="checkbox" />
           <label>Published</label>
         </fieldset>
 
